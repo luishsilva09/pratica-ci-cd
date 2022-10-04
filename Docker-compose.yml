@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:13
+    container_name: db
+    restart: always
+    ports:
+      - 6000:5432
+    env_file:
+      - .env
+
+  node:
+    container_name: students
+    build: .
+    ports:
+      - 5009:5000
+    depends_on:
+      - db
+    env_file:
+      - .env
